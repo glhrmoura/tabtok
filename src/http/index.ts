@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const http = axios.create({
-  baseURL: 'https://www.tabnews.com.br/api/v1'
+  baseURL: import.meta.env.VITE_API_URL,
 });
