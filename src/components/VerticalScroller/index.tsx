@@ -1,12 +1,13 @@
 import { forwardRef } from 'react';
 
-import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
-
 import { Mousewheel } from 'swiper/modules';
+import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 
 import { Container } from './styles';
 
 import { TabItem } from '@/types';
+
+import { getRandomColor } from '@/util';
 
 import { TabItemCard } from '@/components/TabItemCard';
 
@@ -29,7 +30,7 @@ const VerticalScroller = forwardRef<SwiperRef, VerticalScrollerProps>(({ tabItem
       >
         {tabItemList.map((item: TabItem) => (
           <SwiperSlide key={item.id}>
-            <TabItemCard item={item} />
+            <TabItemCard item={item} backgroundColor={getRandomColor()} />
           </SwiperSlide>
         ))}
       </Swiper>

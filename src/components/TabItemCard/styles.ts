@@ -12,6 +12,19 @@ export const Container = styled.div`
   background-color: #161b22;
 `;
 
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
 export const Content = styled.div`
   width: 100%;
   padding: 16px;
@@ -57,3 +70,4 @@ export const CreatedAt = styled.span`
   margin-top: 8px;
   font-size: 12px;
 `;
+
