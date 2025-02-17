@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { http } from '@/http';
 
@@ -21,14 +21,20 @@ const App = () => {
     setTabItemList(state => [...state, ...data]);
   };
 
+  useEffect(() => {
+    load();
+  }, []);
+
   return (
     <Container>
       <GlobalStyle />
       <Content>
-        <VerticalScroller
-          onLoadMore={load}
-          tabItemList={tabItemList}
-        />
+        {Boolean(tabItemList.length) && (
+          <VerticalScroller
+            onLoadMore={load}
+            tabItemList={tabItemList}
+          />
+        )}
       </Content>
     </Container>
   );

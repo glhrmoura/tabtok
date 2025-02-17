@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Mousewheel } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { http } from '@/http';
 
-import { CommentaryContainer, Container } from './styles';
 import { CommentaryItem } from '../Commentary';
+import { CommentaryContainer, Container, EmptyCommentary } from './styles';
 
 import { Commentary, TabItem } from '@/types';
 
@@ -22,17 +22,25 @@ interface VerticalScrollerProps {
 
 const VerticalScroller = ({ tabItemList, onLoadMore }: VerticalScrollerProps) => {
   const modal = useRef<ModalRef | null>(null);
+
+  const [currentItem, setCurrentItem] = useState<TabItem>();
   const [commentaryList, setCommentary] = useState<Commentary[]>([]);
 
   const loadComentaries = async (index: number) => {
     const tabItem = tabItemList[index];
-    const { data } = await http.get(`/contents/${tabItem.owner_username}/${tabItem.slug}/children`);
+    const { data } = await http.get(`/contents/${tabItem?.owner_username}/${tabItem?.slug}/children`);
     setCommentary(data);
   };
 
   const onSlideChange = (swiper: any) => {
     loadComentaries(swiper.activeIndex);
+    setCurrentItem(tabItemList[swiper.activeIndex]);
   };
+
+  useEffect(() => {
+    loadComentaries(0);
+    setCurrentItem(tabItemList[0]);
+  }, []);
 
   return (
     <Container>
@@ -53,9 +61,18 @@ const VerticalScroller = ({ tabItemList, onLoadMore }: VerticalScrollerProps) =>
       </Swiper>
       <Modal title="Comentários" ref={modal} onClose={() => modal?.current?.close()}>
         <CommentaryContainer>
-          {commentaryList.map((item) => (
-            <CommentaryItem key={item.id} item={item} />
-          ))}
+          {commentaryList.length ? (
+            commentaryList.map((item) => (
+              <CommentaryItem key={item.id} item={item} />
+            ))
+          ) : (
+            <EmptyCommentary>
+              <span>Essa postagem ainda não tem commentários.</span>
+              <a target='_blank' href={`https://www.tabnews.com.br/${currentItem?.owner_username}/${currentItem?.slug}`}>
+                Seja o primeiro a comentar
+              </a>
+            </EmptyCommentary>
+          )}
         </CommentaryContainer>
       </Modal>
     </Container>
