@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #ffffff;
     font-family: 'Figtree', sans-serif;
     box-sizing: border-box;
+    user-select: none;
   }
 
   html, body {

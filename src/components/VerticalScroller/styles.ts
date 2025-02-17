@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  position: relative;
   height: 100%;
+  background-color: red;
+  overflow: hidden;
 `;
 
-export const Loading = styled.div`
-  position: absolute;
-  height: 50px;
-  z-index: 0;
+export const CommentaryContainer = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 16px;
+  flex-direction: column;
+  gap: 12px;
+  height: 400px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

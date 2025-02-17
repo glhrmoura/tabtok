@@ -1,6 +1,4 @@
-import { useRef, useState } from 'react';
-
-import { SwiperRef } from 'swiper/react';
+import { useState } from 'react';
 
 import { http } from '@/http';
 
@@ -13,8 +11,6 @@ import { TabItem } from '@/types';
 import { VerticalScroller } from '@/components/VerticalScroller';
 
 const App = () => {
-  const verticalScrollerRef = useRef<SwiperRef>(null);
-
   const [page, setPage] = useState<number>(1);
   const [tabItemList, setTabItemList] = useState<TabItem[]>([]);
 
@@ -30,9 +26,8 @@ const App = () => {
       <GlobalStyle />
       <Content>
         <VerticalScroller
-          ref={verticalScrollerRef}
-          tabItemList={tabItemList}
           onLoadMore={load}
+          tabItemList={tabItemList}
         />
       </Content>
     </Container>

@@ -19,39 +19,43 @@ export const Overlay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: flex-start;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   width: 100%;
   padding: 16px;
-  margin-bottom: 24px;
 `;
 
 export const Title = styled.h2`
-  font-size: 24px;
+  font-size: 28px;
   margin: 0px;
+  margin-top: 24px;
+  line-height: 36px;
 `;
 
-export const Status = styled.span`
+export const UserName = styled.span`
   font-size: 12px;
   padding: 4px;
   border-radius: 4px;
-  background-color: #3fb950;
+  background-color: #6e7681;
   display: inline-block;
-  margin-bottom: 12px;
   font-weight: 600;
 `;
 
 export const OptionContainer = styled.div`
   position: absolute;
-  bottom: 200px;
+  bottom: 150px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   padding: 16px;
 `;
 
@@ -67,7 +71,12 @@ export const Option = styled.div`
 
 export const CreatedAt = styled.span`
   display: inline-block;
-  margin-top: 8px;
   font-size: 12px;
+`;
+
+export const Info = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 

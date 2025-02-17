@@ -1,14 +1,18 @@
-import { forwardRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { Mousewheel } from 'swiper/modules';
-import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Container } from './styles';
+import { http } from '@/http';
 
-import { TabItem } from '@/types';
+import { CommentaryContainer, Container } from './styles';
+import { CommentaryItem } from '../Commentary';
+
+import { Commentary, TabItem } from '@/types';
 
 import { getRandomColor } from '@/util';
 
+import { Modal, ModalRef } from '@/components/Modal';
 import { TabItemCard } from '@/components/TabItemCard';
 
 interface VerticalScrollerProps {
@@ -16,26 +20,46 @@ interface VerticalScrollerProps {
   onLoadMore: () => void;
 }
 
-const VerticalScroller = forwardRef<SwiperRef, VerticalScrollerProps>(({ tabItemList, onLoadMore }, ref) => {
+const VerticalScroller = ({ tabItemList, onLoadMore }: VerticalScrollerProps) => {
+  const modal = useRef<ModalRef | null>(null);
+  const [commentaryList, setCommentary] = useState<Commentary[]>([]);
+
+  const loadComentaries = async (index: number) => {
+    const tabItem = tabItemList[index];
+    const { data } = await http.get(`/contents/${tabItem.owner_username}/${tabItem.slug}/children`);
+    setCommentary(data);
+  };
+
+  const onSlideChange = (swiper: any) => {
+    loadComentaries(swiper.activeIndex);
+  };
+
   return (
     <Container>
       <Swiper
-        ref={ref}
+        mousewheel
         slidesPerView={1}
         modules={[Mousewheel]}
         direction='vertical'
-        mousewheel
         onReachEnd={onLoadMore}
         touchReleaseOnEdges={true}
+        onSlideChange={onSlideChange}
       >
         {tabItemList.map((item: TabItem) => (
           <SwiperSlide key={item.id}>
-            <TabItemCard item={item} backgroundColor={getRandomColor()} />
+            <TabItemCard item={item} backgroundColor={getRandomColor()} onCommentary={() => modal?.current?.open()} />
           </SwiperSlide>
         ))}
       </Swiper>
+      <Modal title="Comentários" ref={modal} onClose={() => modal?.current?.close()}>
+        <CommentaryContainer>
+          {commentaryList.map((item) => (
+            <CommentaryItem key={item.id} item={item} />
+          ))}
+        </CommentaryContainer>
+      </Modal>
     </Container>
   );
-});
+};
 
 export { VerticalScroller };
