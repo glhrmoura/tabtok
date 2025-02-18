@@ -13,18 +13,16 @@ interface TabItemProps {
   onCommentary?: () => void;
 }
 
-const TabItemCard = React.memo(({ item, onCommentary = () => {}, backgroundColor }: TabItemProps) => {
+const TabItemCard = React.memo(({ item, onCommentary = () => { }, backgroundColor }: TabItemProps) => {
   return (
     <a href={`https://www.tabnews.com.br/${item.owner_username}/${item.slug}`} target="_blank" rel="noreferrer">
       <Container style={{ backgroundColor }}>
         <Overlay>
           <OptionContainer>
-            <a href={`https://www.tabnews.com.br/${item.owner_username}/${item.slug}`} target="_blank" rel="noreferrer">
-              <Option>
-                <Icon.Like width={28} />
-                <span>{Math.max(0, item.tabcoins)}</span>
-              </Option>
-            </a>
+            <Option>
+              <Icon.Like width={28} />
+              <span>{Math.max(0, item.tabcoins)}</span>
+            </Option>
             <Option onClick={(event) => {
               onCommentary();
               event.preventDefault();

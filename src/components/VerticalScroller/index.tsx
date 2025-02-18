@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { http } from '@/http';
 
 import { CommentaryItem } from '../Commentary';
-import { CommentaryContainer, Container, EmptyCommentary } from './styles';
+import { CommentaryContainer, Container, EmptyCommentary, CommentaryContent } from './styles';
 
 import { Commentary, TabItem } from '@/types';
 
@@ -62,9 +62,11 @@ const VerticalScroller = ({ tabItemList, onLoadMore }: VerticalScrollerProps) =>
       <Modal title="Comentários" ref={modal} onClose={() => modal?.current?.close()}>
         <CommentaryContainer>
           {commentaryList.length ? (
-            commentaryList.map((item) => (
-              <CommentaryItem key={item.id} item={item} />
-            ))
+            <CommentaryContent>
+              {commentaryList.map((item) => (
+                <CommentaryItem key={item.id} item={item} />
+              ))}
+            </CommentaryContent>
           ) : (
             <EmptyCommentary>
               <span>Essa postagem ainda não tem commentários.</span>

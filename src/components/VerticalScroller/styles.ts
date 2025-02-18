@@ -33,3 +33,10 @@ export const EmptyCommentary = styled.div`
     text-underline-offset: 2px;
   }
 `;
+
+export const CommentaryContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 18px;
+`;

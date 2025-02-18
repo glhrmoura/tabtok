@@ -19,11 +19,13 @@ const CommentaryItem = ({ item }: CommentaryProps) => {
         <BodyContainer>
           <UserName>{item.owner_username}</UserName>
           <Body>{item.body}</Body>
-          <Replay>
-            {item?.children.map((child) => (
-              <CommentaryItem item={child} />
-            ))}
-          </Replay>
+          {Boolean(item?.children.length) && (
+            <Replay>
+              {item.children.map((child) => (
+                <CommentaryItem item={child} />
+              ))}
+            </Replay>
+          )}
         </BodyContainer>
       </Content>
     </Container>
