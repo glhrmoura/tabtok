@@ -38,6 +38,7 @@ export const Title = styled.h2`
   font-size: 28px;
   margin: 0px;
   margin-top: 24px;
+  margin-right: 32px;
   line-height: 36px;
 `;
 
@@ -57,6 +58,7 @@ export const OptionContainer = styled.div`
   flex-direction: column;
   gap: 24px;
   padding: 16px;
+  cursor: default;
 `;
 
 export const Option = styled.div`
