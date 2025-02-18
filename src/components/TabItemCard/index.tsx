@@ -20,10 +20,9 @@ const TabItemCard = React.memo(({ item, onCommentary = () => { }, backgroundColo
         <Overlay>
           <OptionContainer onClick={(event) => event.preventDefault()}>
             <a
+              target="_blank"
               onClick={(event) => event.stopPropagation()}
               href={`https://www.tabnews.com.br/${item.owner_username}/${item.slug}`}
-              target="_blank"
-              rel="noreferrer"
             >
               <Option>
                 <Icon.Like width={28} />
@@ -42,7 +41,13 @@ const TabItemCard = React.memo(({ item, onCommentary = () => { }, backgroundColo
             <Icon.Logo />
             <Title>{item.title}</Title>
             <Info>
-              <UserName>{item.owner_username}</UserName>
+              <a
+                target="_blank"
+                onClick={(event) => event.stopPropagation()}
+                href={`https://www.tabnews.com.br/${item.owner_username}`}
+              >
+                <UserName>{item.owner_username}</UserName>
+              </a>
               <CreatedAt>{calcTime(item.created_at)}</CreatedAt>
             </Info>
           </Content>

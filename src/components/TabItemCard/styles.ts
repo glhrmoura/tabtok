@@ -46,9 +46,10 @@ export const UserName = styled.span`
   font-size: 12px;
   padding: 4px;
   border-radius: 4px;
-  background-color: #6e7681;
+  background-color: #FFFFFF;
   display: inline-block;
   font-weight: 600;
+  color: #000000
 `;
 
 export const OptionContainer = styled.div`
